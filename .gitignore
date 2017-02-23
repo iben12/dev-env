@@ -1,3 +1,4 @@
 /web/app/*
 /web/echo-server/node_modules
 /mysql/data/*
+.log
