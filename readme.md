@@ -31,7 +31,7 @@ $ docker-compose up -d
 For the first time it will take while till docker pulls all the images, but this won't be needed next time.
 
 
-By default your application webroot is configured `web/app/public`, so go ahead and create and `index.php` there! Also by default your application hostname is configured to `myapp.dev`, so you should set that up in your `hosts` file like this:
+By default your application webroot is configured `web/app/public`, so go ahead and create an `index.php` there! Also by default your application hostname is configured to `myapp.dev`, so you should set that up in your `hosts` file like this:
 
     127.0.0.1 myapp.dev
 
@@ -48,7 +48,7 @@ All done, so just direct your browser to http://myapp.dev and the index output s
   * to connect to the server from the host computer:
     * hostname: `localhost` (or VM's IP on Mac/Windows)
     * port: `13306`
-    
+
 ### Redis
   * hostname: `redis`
   * port: `6379`
@@ -72,7 +72,7 @@ To list running services
 ```
 $ docker-compose ps
 ```
-To stop adn destroy all containers
+To stop and destroy all containers
 ```
 $ docker-compose down
 ```
