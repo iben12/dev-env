@@ -1,9 +1,0 @@
-FROM node:alpine
-
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-
-COPY ./web/echo-server /usr/src/app
-RUN npm install && npm cache clean
-
-CMD ["node", "server.js" ]
