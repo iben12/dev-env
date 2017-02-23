@@ -48,9 +48,11 @@ All done, so just direct your browser to http://myapp.dev and the index output s
   * to connect to the server from the host computer:
     * hostname: `localhost` (or VM's IP on Mac/Windows)
     * port: `13306`
+    
 ### Redis
   * hostname: `redis`
   * port: `6379`
+
 ### MailHog
   * Use as SMTP server as follows:
     * hostname: `mail`
