@@ -1,0 +1,54 @@
+version: '2'
+services:
+    nginx-proxy:
+        image: jwilder/nginx-proxy
+        container_name: nginx-proxy
+        ports:
+            - "80:80"
+        volumes:
+            - /var/run/docker.sock:/tmp/docker.sock:ro
+    mysql:
+        image: mysql:latest
+        volumes:
+            - ./docker/mysql/dump.sql:/docker-entrypoint-initdb.d/dump.sql
+            - ./mysql/data:/var/lib/mysql
+        ports:
+            - "13306:3306"
+        env_file: 
+            - ./config.env
+    redis:
+        image: redis:3-alpine
+    mail:
+        image: mailhog/mailhog
+        environment:
+            - VIRTUAL_HOST=mail.myapp.dev
+            - VIRTUAL_PORT=8025
+    app:
+        image: webdevops/php-nginx-dev
+        environment:
+            - VIRTUAL_HOST=myapp.dev
+            - POSTFIX_RELAYHOST=[mail]:1025
+        env_file: 
+            - ./config.env
+        volumes:
+            - ./docker:/mydocker
+            - ./docker/entrypoint.d/05_appinit.sh:/opt/docker/provision/entrypoint.d/05_appinit.sh
+            - ./web/app:/app
+        working_dir: /app
+        depends_on:
+            - mysql
+            - nginx-proxy
+            - redis
+    echo-server:
+        build:
+            context: .
+            dockerfile: Dockerfile-node
+        environment:
+            - VIRTUAL_HOST=echo-server.dev
+        volumes:
+            - ./web/echo-server/server.js:/usr/src/app/server.js
+        ports:
+            - "6001"
+        working_dir: /usr/src/app
+        depends_on:
+            - redis

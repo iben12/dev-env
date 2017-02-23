@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [[ ! $APPLICATION_UID == $(id -u application) ]]
+then
+    usermod -u $APPLICATION_UID application
+    groupmod -g $APPLICATION_GID application
+fi
+
+docker-compose exec $1 su application

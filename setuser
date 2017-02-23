@@ -1,0 +1,10 @@
+#!/bin/sh
+
+echo "\n" >> config.env
+
+echo APPLICATION_UID=$(id -u) >> config.env
+
+echo APPLICATION_GID=$(id -g) >> config.env
+
+echo "User/group environment variables set.\n"
+
